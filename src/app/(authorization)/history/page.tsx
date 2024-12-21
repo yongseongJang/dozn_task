@@ -2,23 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-import { useRouter } from 'next/navigation'
 import { Stack, FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material'
 
 import { HistoryCard } from '@/app/(authorization)/history/components'
 import { apiDetailType } from '@/types'
 
 export default function HistoryPage() {
-    const router = useRouter()
     const [ cookies ]= useCookies(['token'])
     const [ order, setOrder ] = useState<string>('desc')
     const [ selectedApis, setSelectedApi ] = useState<apiDetailType[]>([])
 
     useEffect(() => {
-        if (!cookies.token) {
-            router.push('/login')
-        }
-
         const selectedApis = localStorage.getItem(`${cookies.token.identification}_selectedApis`) 
         if (selectedApis) {
             setSelectedApi(JSON.parse(selectedApis).sort((a: apiDetailType, b: apiDetailType) => { 
