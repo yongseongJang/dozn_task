@@ -10,11 +10,9 @@ export const useScrapingQuery = (mdulCustCd: string, apiCd: string) => {
     const { isLoading, isError, error, data } = useQuery({
         queryKey: [QUERY_KEY.SCRAPING, mdulCustCd, apiCd],
         queryFn: async () => {
-            if (cookies.token) {
-                const response = await api.get('/admin/api/recruit/scrp-recruit', { mdulCustCd, apiCd }, {headers: {Authorization: `Bearer ${cookies.token.accessToken}`}}) 
+            const response = await api.get('/admin/api/recruit/scrp-recruit', { mdulCustCd, apiCd }, {headers: {Authorization: `Bearer ${cookies.token?.accessToken}`}}) 
                 
-                return response.data.data
-            }
+            return response.data.data
         }
     })
 

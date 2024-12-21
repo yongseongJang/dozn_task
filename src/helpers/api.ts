@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://admin.octover.co.kr'
+axios.defaults.baseURL = process.env.API_BASE_URL
 
 class API {
     get = (url: string, params: { [key: string]: any } = {}, config: { [key: string]: any } = {}) => {

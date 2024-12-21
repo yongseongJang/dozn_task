@@ -10,11 +10,9 @@ export const useApiListQuery = ({pageSize, pageIndex}: {pageSize: number, pageIn
     const { isLoading, isError, error, data } = useQuery({
         queryKey: [QUERY_KEY.API_LIST, pageSize, pageIndex],
         queryFn: async () => {
-            if (cookies.token) {
-                const response = await api.get('/admin/api/user/api/list', { pageSize, pageIndex }, {headers: {Authorization: `Bearer ${cookies.token.accessToken}`}}) 
+            const response = await api.get('/admin/api/user/api/list', { pageSize, pageIndex }, {headers: {Authorization: `Bearer ${cookies.token?.accessToken}`}}) 
 
-                return response.data.data
-            }
+            return response.data.data
         }
     })
 
